@@ -1,6 +1,12 @@
 import { Stack } from 'expo-router';
+import { migrate } from "../lib/db"
+import {useEffect} from "react";
 
 export default function Layout() {
+    useEffect(() => {
+        (async () => { await migrate() })();
+    })
+
     return (
         <Stack
             screenOptions={{
