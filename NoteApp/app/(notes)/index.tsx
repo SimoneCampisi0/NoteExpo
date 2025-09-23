@@ -48,7 +48,7 @@ export default function NotesListScreen() {
                         <View style={styles.headerRow}>
                             <Text style={styles.title}>{item.title}</Text>
                             <Pressable onPress={() => console.log("apri nota", item.id_note)}>
-                                <FontAwesome6 name="arrow-right" size={18} color="white" />
+                                <FontAwesome6 name="arrow-right" size={18} color="black" />
                             </Pressable>
                         </View>
 
@@ -68,7 +68,7 @@ export default function NotesListScreen() {
 
 const styles = StyleSheet.create({
     card: {
-        backgroundColor: "#101010",
+        backgroundColor: "#f4f4f4",
         borderRadius: 12,
         padding: 16,
         marginHorizontal: 20,
@@ -88,11 +88,11 @@ const styles = StyleSheet.create({
     title: {
         fontSize: 18,
         fontWeight: "600",
-        color: "#ffffff",
+        color: "#000000",
     },
     body: {
         fontSize: 14,
-        color: "#ffffff",
+        color: "#000000",
         marginTop: 8,
     },
 });
