@@ -1,8 +1,8 @@
-import {FlatList, Pressable, Text, View, StyleSheet, Button} from "react-native";
-import {useCallback, useEffect, useState} from "react";
+import {FlatList, Pressable, Text, View, StyleSheet} from "react-native";
+import {useCallback, useState} from "react";
 import {listNotes, Note} from "@/lib/note_repo";
 import {Stack, useFocusEffect, useRouter} from "expo-router";
-import {FontAwesome, FontAwesome6} from "@expo/vector-icons";
+import {FontAwesome6} from "@expo/vector-icons";
 
 export default function NotesListScreen() {
     const router = useRouter();
@@ -29,6 +29,8 @@ export default function NotesListScreen() {
             <Stack.Screen
                 options={{
                     title: "My Notes",
+                    headerBackVisible: false,
+                    headerLeft: () => null,
                     headerRight: () => (
                         <Pressable onPress={() => router.push("/note/new")}>
                             <Text style={{fontSize: 18, paddingHorizontal: 10}}>
@@ -40,6 +42,7 @@ export default function NotesListScreen() {
             />
 
             <FlatList
+                style={{ marginTop: 10 }}
                 data={notes}
                 keyExtractor={(item) => item.id_note.toString()}
                 renderItem={({ item }) => (

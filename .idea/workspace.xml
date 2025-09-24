@@ -5,8 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="af9290fd-6011-4dea-a1aa-4737e1bf3759" name="Changes" comment="Rebuild the project in .tsx.&#10;Add listNotes API invocation.&#10;TODO: add new page for add a new page.">
-      <change beforePath="$PROJECT_DIR$/NoteApp/lib/db.ts" beforeDir="false" afterPath="$PROJECT_DIR$/NoteApp/lib/db.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/NoteApp/lib/note_repo.ts" beforeDir="false" afterPath="$PROJECT_DIR$/NoteApp/lib/note_repo.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NoteApp/app/(notes)/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/NoteApp/app/(notes)/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NoteApp/app/_layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/NoteApp/app/_layout.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NoteApp/app/note/new.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/NoteApp/app/note/new.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,14 +46,14 @@
     &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;master&quot;,
     &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/simon/Desktop/Dev/Note/NoteApp/lib&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/simon/Desktop/Desktop/Personale/NoteApp&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
     &quot;npm.start.executor&quot;: &quot;Run&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;C:\\Users\\simon\\Desktop\\Dev\\Note\\NoteApp\\node_modules\\typescript\\lib&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;C:\\Users\\simon\\Desktop\\Desktop\\Personale\\NoteApp\\NoteApp\\node_modules\\typescript\\lib&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
@@ -93,7 +95,7 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-js-predefined-d6986cc7102b-e03c56caf84a-JavaScript-WS-252.23892.411" />
+        <option value="bundled-js-predefined-d6986cc7102b-09060db00ec0-JavaScript-WS-251.28293.17" />
       </set>
     </attachedChunks>
   </component>
@@ -108,6 +110,10 @@
       <workItem from="1758379033028" duration="5837000" />
       <workItem from="1758460062183" duration="5587000" />
       <workItem from="1758482193535" duration="3868000" />
+      <workItem from="1758641611649" duration="25000" />
+      <workItem from="1758641650048" duration="1913000" />
+      <workItem from="1758700688641" duration="8000" />
+      <workItem from="1758719024882" duration="5906000" />
     </task>
     <task id="LOCAL-00001" summary="First push">
       <option name="closed" value="true" />

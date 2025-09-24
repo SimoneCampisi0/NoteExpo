@@ -12,7 +12,7 @@ export default function RootLayout() {
             try {
                 if (__DEV__) {
                     // ⚠️ Solo in sviluppo! In produzione NON cancellare.
-                    await resetDb();
+                    // await resetDb();
                 }
                 await migrate();
                 setReady(true);
