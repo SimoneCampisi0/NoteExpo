@@ -12,13 +12,10 @@ import {createNote, NewNote} from "@/lib/note_repo";
 
 export default function NewNoteScreen() {
     const router = useRouter();
-    const [title, setTitle] = useState("Prova");
+    const [title, setTitle] = useState("");
     const [textBody, setTextBody] = useState("");
 
     async function onAddNewNote(): Promise<void> {
-        console.log("onAddNewNote");
-        console.log("noteTitle: ", title);
-        console.log("noteBody: ", textBody);
         const newNote: NewNote = {
             title: title,
             text: textBody,
@@ -58,11 +55,12 @@ export default function NewNoteScreen() {
                         keyboardShouldPersistTaps="handled"
                     >
                         <View style={styles.card}>
-                            <Text style={styles.inputTitle}>Note title:</Text>
                             <TextInput
                                 style={styles.inputTextTitle}
                                 value={title}
                                 onChangeText={setTitle}
+                                placeholder={"Title..."}
+                                placeholderTextColor="#999"
                             />
 
                             <TextInput
@@ -72,6 +70,7 @@ export default function NewNoteScreen() {
                                 multiline
                                 scrollEnabled
                                 placeholder="Write your note…"
+                                placeholderTextColor="#999"
                             />
                         </View>
                     </ScrollView>
@@ -92,24 +91,17 @@ const styles = StyleSheet.create({
         marginHorizontal: 8,
         marginVertical: 8,
         flexDirection: "column",
-        gap: 6,
-    },
-    inputTitle: {
-        fontSize: 18,
-        marginBottom: 4,
+        gap: 2,
     },
     inputTextTitle: {
-        backgroundColor: "#dcdcdc",
-        height: 40,
+        fontSize: 22,
+        fontWeight: "bold",
         paddingHorizontal: 8,
-        borderRadius: 6,
+        marginBottom: 8,
     },
     inputTextBody: {
-        backgroundColor: "#dcdcdc",
         flex: 1,
         minHeight: 0,
-        padding: 8,
-        borderRadius: 6,
         textAlignVertical: "top",
     },
 });

@@ -24,6 +24,10 @@ export default function NotesListScreen() {
         }, [loadNotes])
     );
 
+    function navigateToDetail(idNote: number): void {
+        router.push(`/note/${idNote}`);
+    }
+
     return (
         <>
             <Stack.Screen
@@ -46,7 +50,7 @@ export default function NotesListScreen() {
                 data={notes}
                 keyExtractor={(item) => item.id_note.toString()}
                 renderItem={({ item }) => (
-                    <View style={styles.card}>
+                    <Pressable style={styles.card} onPress={() => navigateToDetail(item.id_note)}>
                         {/* Riga con titolo e button */}
                         <View style={styles.headerRow}>
                             <Text style={styles.title}>{item.title}</Text>
@@ -59,7 +63,7 @@ export default function NotesListScreen() {
                         <Text numberOfLines={3} style={styles.body}>
                             {item.text}
                         </Text>
-                    </View>
+                    </Pressable>
                 )}
             />
 
