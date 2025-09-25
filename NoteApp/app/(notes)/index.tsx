@@ -11,7 +11,6 @@ export default function NotesListScreen() {
     const loadNotes = useCallback(async () => {
         try {
             const rows = await listNotes();
-            console.log("rows obtained: ", rows);
             setNotes(rows);
         } catch (err) {
             console.log("error during notes loading: ", err);
@@ -54,9 +53,6 @@ export default function NotesListScreen() {
                         {/* Riga con titolo e button */}
                         <View style={styles.headerRow}>
                             <Text style={styles.title}>{item.title}</Text>
-                            <Pressable onPress={() => console.log("apri nota", item.id_note)}>
-                                <FontAwesome6 name="arrow-right" size={18} color="black" />
-                            </Pressable>
                         </View>
 
                         {/* Corpo del testo */}

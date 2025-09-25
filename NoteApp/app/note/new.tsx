@@ -23,8 +23,7 @@ export default function NewNoteScreen() {
             updatedAt: new Date().getTime(),
         };
 
-        const idNote = await createNote(newNote);
-        console.log("idNote: ", idNote);
+        await createNote(newNote);
         router.replace("/");
     }
 
@@ -96,7 +95,6 @@ const styles = StyleSheet.create({
     inputTextTitle: {
         fontSize: 22,
         fontWeight: "bold",
-        paddingHorizontal: 8,
         marginBottom: 8,
     },
     inputTextBody: {

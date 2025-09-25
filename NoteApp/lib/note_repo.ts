@@ -50,15 +50,17 @@ export async function getNote(id_note: number): Promise<Note | null> {
 
 // UPDATE
 export async function updateNote(
-    args: Pick<Note, "id_note" | "title" | "text" | "updatedAt">
+    id_note: number,
+    title: string,
+    text: string,
+    updatedAt: number
 ): Promise<void> {
     const db = getDb();
-    const { id_note, title, text, updatedAt } = args;
 
     await db.runAsync(
         `UPDATE note
-     SET title = ?, text = ?, updatedAt = ?
-     WHERE id_note = ?`,
+         SET title = ?, text = ?, updatedAt = ?
+         WHERE id_note = ?`,
         [title, text, updatedAt, id_note]
     );
 }
