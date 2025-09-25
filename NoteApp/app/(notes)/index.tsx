@@ -44,24 +44,31 @@ export default function NotesListScreen() {
                 }}
             />
 
-            <FlatList
-                style={{ marginTop: 10 }}
-                data={notes}
-                keyExtractor={(item) => item.id_note.toString()}
-                renderItem={({ item }) => (
-                    <Pressable style={styles.card} onPress={() => navigateToDetail(item.id_note)}>
-                        {/* Riga con titolo e button */}
-                        <View style={styles.headerRow}>
-                            <Text style={styles.title}>{item.title}</Text>
-                        </View>
+            {notes.length > 0 ? (
+                <FlatList
+                    style={{ marginTop: 10 }}
+                    data={notes}
+                    keyExtractor={(item) => item.id_note.toString()}
+                    renderItem={({ item }) => (
+                        <Pressable style={styles.card} onPress={() => navigateToDetail(item.id_note)}>
+                            {/* Riga con titolo e button */}
+                            <View style={styles.headerRow}>
+                                <Text style={styles.title}>{item.title}</Text>
+                            </View>
 
-                        {/* Corpo del testo */}
-                        <Text numberOfLines={3} style={styles.body}>
-                            {item.text}
-                        </Text>
-                    </Pressable>
-                )}
-            />
+                            {/* Corpo del testo */}
+                            <Text numberOfLines={3} style={styles.body}>
+                                {item.text}
+                            </Text>
+                        </Pressable>
+                    )}
+                />
+            ) : (
+                <View style={styles.emptyContainer}>
+                    <Text style={styles.emptyText}>No notes found.</Text>
+                </View>
+            )
+            }
 
 
         </>
@@ -97,5 +104,14 @@ const styles = StyleSheet.create({
         fontSize: 14,
         color: "#000000",
         marginTop: 8,
+    },
+    emptyContainer: {
+        flex: 1,
+        marginTop: '80%',
+        paddingHorizontal: 20,
+    },
+    emptyText: {
+        fontSize: 22,
+        textAlign: "center",
     },
 });
