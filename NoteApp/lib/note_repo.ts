@@ -48,6 +48,21 @@ export async function getNote(id_note: number): Promise<Note | null> {
     );
 }
 
+// SEARCH
+export async function searchNotes(inputText: string): Promise<Note[]> {
+    const db = getDb();
+    const pattern = `%${inputText.toLowerCase()}%`;
+    return db.getAllAsync<Note>(
+        `
+            SELECT id_note, title, text, createdAt, updatedAt
+            FROM note
+            WHERE LOWER(title) LIKE ?
+               OR LOWER(text)  LIKE ?;
+        `,
+        [pattern, pattern]
+    );
+}
+
 // UPDATE
 export async function updateNote(
     id_note: number,
