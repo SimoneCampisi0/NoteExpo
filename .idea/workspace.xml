@@ -4,11 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="af9290fd-6011-4dea-a1aa-4737e1bf3759" name="Changes" comment="Rebuild the project in .tsx.&#10;Add listNotes API invocation.&#10;TODO: add new page for add a new page.">
+    <list default="true" id="af9290fd-6011-4dea-a1aa-4737e1bf3759" name="Changes" comment="Fix autosave note.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/NoteApp/app/(notes)/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/NoteApp/app/(notes)/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/NoteApp/app/_layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/NoteApp/app/_layout.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NoteApp/app/note/[id].tsx" beforeDir="false" afterPath="$PROJECT_DIR$/NoteApp/app/note/[id].tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/NoteApp/app/note/new.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/NoteApp/app/note/new.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NoteApp/lib/db.ts" beforeDir="false" afterPath="$PROJECT_DIR$/NoteApp/lib/db.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NoteApp/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/NoteApp/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NoteApp/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/NoteApp/package.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -113,7 +115,8 @@
       <workItem from="1758641611649" duration="25000" />
       <workItem from="1758641650048" duration="1913000" />
       <workItem from="1758700688641" duration="8000" />
-      <workItem from="1758719024882" duration="5906000" />
+      <workItem from="1758719024882" duration="6542000" />
+      <workItem from="1758788829018" duration="12002000" />
     </task>
     <task id="LOCAL-00001" summary="First push">
       <option name="closed" value="true" />
@@ -139,16 +142,54 @@
       <option name="project" value="LOCAL" />
       <updated>1758466954652</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="End implementation of new note.">
+      <option name="closed" value="true" />
+      <created>1758728932792</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1758728932792</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Add autosave note.">
+      <option name="closed" value="true" />
+      <created>1758792305972</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1758792305972</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Fix autosave note.">
+      <option name="closed" value="true" />
+      <created>1758809113350</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1758809113350</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="First push" />
     <MESSAGE value="Add SQLite first config" />
     <MESSAGE value="Rebuild the project in .tsx.&#10;Add listNotes API invocation.&#10;TODO: add new page for add a new page." />
-    <option name="LAST_COMMIT_MESSAGE" value="Rebuild the project in .tsx.&#10;Add listNotes API invocation.&#10;TODO: add new page for add a new page." />
+    <MESSAGE value="End implementation of new note." />
+    <MESSAGE value="Add autosave note." />
+    <MESSAGE value="Fix autosave note." />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix autosave note." />
   </component>
 </project>

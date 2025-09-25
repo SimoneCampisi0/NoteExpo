@@ -13,6 +13,7 @@ import {useCallback, useEffect, useMemo, useRef, useState} from "react";
 import {Stack, useFocusEffect, useLocalSearchParams, useNavigation, useRouter} from "expo-router";
 import { FontAwesome6 } from "@expo/vector-icons";
 import {usePreventRemove} from "@react-navigation/native";
+import dayjs from "dayjs";
 
 export default function DetailNoteScreen() {
     const router = useRouter();
@@ -129,6 +130,8 @@ export default function DetailNoteScreen() {
 
     useEffect(() => {
         /* A ogni modifica del title o del body, viene resettato il timer */
+        if(!isDirty) return;
+
         if(saveTimeoutRef.current) {
             clearTimeout(saveTimeoutRef.current);
         }
@@ -221,6 +224,19 @@ export default function DetailNoteScreen() {
                                 placeholder={"Title..."}
                                 placeholderTextColor="#999"
                             />
+
+                            {note && note.updatedAt && (
+                                <View>
+                                  <Text>{dayjs(note.updatedAt).format("YYYY-MM-DD HH:mm")}</Text>
+                                </View>
+                                )
+                            }
+
+                            {note && !note.updatedAt && (
+                                <View>
+                                    <Text>{dayjs(note.createdAt).format("YYYY-MM-DD HH:mm")}</Text>
+                                </View>
+                            )}
 
                             <TextInput
                                 style={styles.inputTextBody}

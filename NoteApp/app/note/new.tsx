@@ -16,6 +16,9 @@ export default function NewNoteScreen() {
     const [textBody, setTextBody] = useState("");
 
     async function onAddNewNote(): Promise<void> {
+        if(title.length === 0 && textBody.length === 0) {
+            return;
+        }
         const newNote: NewNote = {
             title: title,
             text: textBody,
