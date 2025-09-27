@@ -1,12 +1,15 @@
-import {FlatList, Pressable, Text, View, StyleSheet} from "react-native";
-import {useCallback, useState} from "react";
+import {FlatList, Pressable, Text, View, StyleSheet, TextInput} from "react-native";
+import {useCallback, useLayoutEffect, useState} from "react";
 import {listNotes, Note} from "@/lib/note_repo";
-import {Stack, useFocusEffect, useRouter} from "expo-router";
+import {Stack, useFocusEffect, useNavigation, useRouter} from "expo-router";
 import {FontAwesome6} from "@expo/vector-icons";
 
 export default function NotesListScreen() {
     const router = useRouter();
     const [notes, setNotes] = useState<Note[]>([]);
+    const navigation = useNavigation();
+    const [isSearching, setIsSearching] = useState(false);
+    const [query, setQuery] = useState("");
 
     const loadNotes = useCallback(async () => {
         try {
@@ -23,26 +26,73 @@ export default function NotesListScreen() {
         }, [loadNotes])
     );
 
+    useLayoutEffect(() => {
+        navigation.setOptions({
+            headerTitle: () =>
+                isSearching ? (
+                    <TextInput
+                        placeholder="Search..."
+                        autoFocus
+                        value={query}
+                        onChangeText={setQuery}
+                        style={{
+                            backgroundColor: "#eee",
+                            paddingHorizontal: 10,
+                            borderRadius: 8,
+                            height: 36,
+                            width: "90%",
+                        }}
+                    />
+                ) : (
+                    <Text style={{ fontSize: 18, fontWeight: "600" }}>My Notes</Text>
+                ),
+            headerLeft: () =>
+                isSearching ? (
+                    <Pressable onPress={() => { setIsSearching(false); setQuery(""); }}>
+                        <FontAwesome6 name="xmark" size={18} style={{ paddingHorizontal: 10 }} />
+                    </Pressable>
+                ) : (
+                    <Pressable onPress={() => setIsSearching(true)}>
+                        <FontAwesome6 name="magnifying-glass" size={18} style={{ paddingHorizontal: 10 }} />
+                    </Pressable>
+                ),
+            headerRight: () =>
+                isSearching ? null : (
+                    <Pressable onPress={() => router.push("/note/new")}>
+                        <FontAwesome6 name="plus" size={18} style={{ paddingHorizontal: 10 }} />
+                    </Pressable>
+                ),
+        })
+    }, [navigation, isSearching, query]);
+
     function navigateToDetail(idNote: number): void {
         router.push(`/note/${idNote}`);
     }
 
     return (
         <>
-            <Stack.Screen
-                options={{
-                    title: "My Notes",
-                    headerBackVisible: false,
-                    headerLeft: () => null,
-                    headerRight: () => (
-                        <Pressable onPress={() => router.push("/note/new")}>
-                            <Text style={{fontSize: 18, paddingHorizontal: 10}}>
-                                <FontAwesome6 name={"plus"} size={18}/>
-                            </Text>
-                        </Pressable>
-                    ),
-                }}
-            />
+            {/*<Stack.Screen*/}
+            {/*    options={{*/}
+            {/*        title: "My Notes",*/}
+            {/*        headerBackVisible: false,*/}
+            {/*        headerLeft: () => (*/}
+            {/*            <Pressable onPress={() => console.log("open search bar") }>*/}
+            {/*                <Text style={{fontSize: 18, paddingHorizontal: 10}}>*/}
+            {/*                    <FontAwesome6 name={"magnifying-glass"} size={18}/>*/}
+            {/*                </Text>*/}
+            {/*            </Pressable>*/}
+            {/*        ),*/}
+            {/*        headerRight: () => (*/}
+            {/*            <Pressable onPress={() => router.push("/note/new")}>*/}
+            {/*                <Text style={{fontSize: 18, paddingHorizontal: 10}}>*/}
+            {/*                    <FontAwesome6 name={"plus"} size={18}/>*/}
+            {/*                </Text>*/}
+            {/*            </Pressable>*/}
+            {/*        ),*/}
+            {/*    }}*/}
+            {/*/>*/}
+            <Stack.Screen options={{ headerBackVisible: false }} />
+
 
             {notes.length > 0 ? (
                 <FlatList
