@@ -28,40 +28,48 @@ export default function NotesListScreen() {
 
     useLayoutEffect(() => {
         navigation.setOptions({
+            title: "My Notes",
             headerTitle: () =>
                 isSearching ? (
-                    <TextInput
-                        placeholder="Search..."
-                        autoFocus
-                        value={query}
-                        onChangeText={setQuery}
-                        style={{
-                            backgroundColor: "#eee",
-                            paddingHorizontal: 10,
-                            borderRadius: 8,
-                            height: 36,
-                            width: "90%",
-                        }}
-                    />
+                    <View style={{flex: 1}}>
+                        <TextInput
+                            placeholder="Search..."
+                            autoFocus
+                            value={query}
+                            onChangeText={setQuery}
+                            style={{
+                                backgroundColor: "#eee",
+                                paddingHorizontal: 10,
+                                borderRadius: 8,
+                                height: 36,
+                                width: "90%",
+                            }}
+                        />
+                    </View>
                 ) : (
-                    <Text style={{ fontSize: 18, fontWeight: "600" }}>My Notes</Text>
+                    <Text style={{fontSize: 18, fontWeight: "600"}}>My Notes</Text>
                 ),
             headerLeft: () =>
                 isSearching ? (
-                    <Pressable onPress={() => { setIsSearching(false); setQuery(""); }}>
-                        <FontAwesome6 name="xmark" size={18} style={{ paddingHorizontal: 10 }} />
-                    </Pressable>
+                    null
                 ) : (
-                    <Pressable onPress={() => setIsSearching(true)}>
-                        <FontAwesome6 name="magnifying-glass" size={18} style={{ paddingHorizontal: 10 }} />
+                    <Pressable onPress={() => router.push("/note/new")}>
+                        <FontAwesome6 name="plus" size={18} style={{paddingHorizontal: 10}}/>
                     </Pressable>
                 ),
             headerRight: () =>
-                isSearching ? null : (
-                    <Pressable onPress={() => router.push("/note/new")}>
-                        <FontAwesome6 name="plus" size={18} style={{ paddingHorizontal: 10 }} />
+                isSearching ?
+                    <Pressable onPress={() => {
+                        setIsSearching(false);
+                        setQuery("");
+                    }}>
+                        <FontAwesome6 name="xmark" size={18} style={{paddingHorizontal: 10}}/>
                     </Pressable>
-                ),
+                    : (
+                        <Pressable onPress={() => setIsSearching(true)}>
+                            <FontAwesome6 name="magnifying-glass" size={18} style={{paddingHorizontal: 10}}/>
+                        </Pressable>
+                    ),
         })
     }, [navigation, isSearching, query]);
 
@@ -91,15 +99,15 @@ export default function NotesListScreen() {
             {/*        ),*/}
             {/*    }}*/}
             {/*/>*/}
-            <Stack.Screen options={{ headerBackVisible: false }} />
+            <Stack.Screen options={{headerBackVisible: false}}/>
 
 
             {notes.length > 0 ? (
                 <FlatList
-                    style={{ marginTop: 10 }}
+                    style={{marginTop: 10}}
                     data={notes}
                     keyExtractor={(item) => item.id_note.toString()}
-                    renderItem={({ item }) => (
+                    renderItem={({item}) => (
                         <Pressable style={styles.card} onPress={() => navigateToDetail(item.id_note)}>
                             {/* Riga con titolo e button */}
                             <View style={styles.headerRow}>
@@ -137,7 +145,7 @@ const styles = StyleSheet.create({
         shadowColor: "#686868",
         shadowOpacity: 0.5,
         shadowRadius: 5,
-        shadowOffset: { width: 0, height: 2 },
+        shadowOffset: {width: 0, height: 2},
         elevation: 4,
     },
     headerRow: {
