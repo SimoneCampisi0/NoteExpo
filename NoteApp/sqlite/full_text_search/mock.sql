@@ -1,0 +1,7 @@
+INSERT INTO note (title,"text",createdAt,updatedAt) VALUES
+('prova','TEXT OF FIRST NOTE',1727727727727,1727727727727),
+('provola','goku',1727727727727,1727727727727),
+('salame','vegeta',1727727727727,1727727727727),
+('mortadella','trunks',1727727727727,1727727727727),
+('prosciutto','bulma',1727727727727,1727727727727),
+('parmiggiano','piccolo',1727727727727,1727727727727);

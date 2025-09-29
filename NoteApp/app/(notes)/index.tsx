@@ -1,6 +1,6 @@
 import {FlatList, Pressable, Text, View, StyleSheet, TextInput} from "react-native";
-import {useCallback, useLayoutEffect, useState} from "react";
-import {listNotes, Note} from "@/lib/note_repo";
+import {useCallback, useEffect, useLayoutEffect, useState} from "react";
+import {listNotes, Note, searchNotes} from "@/lib/note_repo";
 import {Stack, useFocusEffect, useNavigation, useRouter} from "expo-router";
 import {FontAwesome6} from "@expo/vector-icons";
 
@@ -20,12 +20,31 @@ export default function NotesListScreen() {
         }
     }, []);
 
+    const loadNotesWithFilters = useCallback(async () => {
+        try {
+            console.log("entro")
+            const newNotes = await searchNotes(query);
+            console.log("new notes", notes)
+            setNotes(newNotes);
+        } catch(err) {
+            console.log("error during notes loading: ", err);
+        }
+    }, [query]);
+
+    useEffect(() => {
+        loadNotesWithFilters();
+    }, [loadNotesWithFilters])
+
+    /* Effetto che viene eseguito quando si sposta il focus su questo stack */
     useFocusEffect(
         useCallback(() => {
-            loadNotes();
-        }, [loadNotes])
+            if (!query.trim()) {
+                loadNotes();
+            }
+        }, [loadNotes, query])
     );
 
+    /* Effetto che viene eseguito per definire il layout dell'header dello stack */
     useLayoutEffect(() => {
         navigation.setOptions({
             title: "My Notes",
@@ -73,7 +92,7 @@ export default function NotesListScreen() {
         })
     }, [navigation, isSearching, query]);
 
-    function navigateToDetail(idNote: number): void {
+     function navigateToDetail(idNote: number): void {
         router.push(`/note/${idNote}`);
     }
 
