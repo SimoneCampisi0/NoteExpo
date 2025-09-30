@@ -1,5 +1,7 @@
 // lib/db.ts
 import * as SQLite from "expo-sqlite";
+import {Asset} from "expo-asset"
+import { File } from "expo-file-system";
 
 const DB_NAME = "note.db";
 let db: SQLite.SQLiteDatabase | null = null;
@@ -19,37 +21,25 @@ export async function closeDbIfOpen() {
 }
 
 export async function resetDb() {
-    // 1) chiudi se aperto
     await closeDbIfOpen();
-    // 2) cancella file
     await SQLite.deleteDatabaseAsync(DB_NAME);
-    // 3) NON riaprire qui: lascia che lo faccia migrate()/getDb()
+}
+
+async function runSqlScript(moduleRef: number): Promise<void> {
+    const db = getDb();
+
+    // Risolve e scarica l’asset
+    const asset = Asset.fromModule(moduleRef);
+    await asset.downloadAsync();
+    const uri = asset.localUri ?? asset.uri;
+
+    const file = new File(uri);
+    const sql = await file.text();
+
+    await db.execAsync(sql);
 }
 
 export async function migrate(): Promise<void> {
-    const _db = getDb(); // apre solo ora, dopo eventuale reset
-    await _db.execAsync(`
-    PRAGMA journal_mode = WAL;
-
-    CREATE TABLE IF NOT EXISTS note (
-      id_note   INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
-      title     TEXT NOT NULL,
-      text      TEXT NOT NULL,
-      createdAt INTEGER,
-      updatedAt INTEGER
-    );
-
-    CREATE INDEX IF NOT EXISTS idx_note_updatedAt ON note(updatedAt);
-    CREATE INDEX IF NOT EXISTS idx_note_title ON note(title);
-  `);
-
-    // Inserisci la nota di test SOLO se la tabella è vuota (evita duplicati a ogni migrate)
-    await _db.runAsync(
-        `
-    INSERT INTO note (title, text, createdAt, updatedAt)
-    SELECT ?, ?, ?, ?
-    WHERE NOT EXISTS (SELECT 1 FROM note)
-    `,
-        ["TEST_NOTE", "TEXT OF FIRST NOTE", Date.now(), Date.now()]
-    );
+    await runSqlScript(require('../assets/sqlite/init_db.sql'));
+    await runSqlScript(require('../assets/sqlite/full_text_search/init_full_text.sql'));
 }

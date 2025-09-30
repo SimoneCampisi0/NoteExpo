@@ -37,22 +37,30 @@ export async function listNotes(): Promise<Note[]> {
     );
 }
 
-// SEARCH / READ with filters
+// // SEARCH / READ full text with filters
 export async function searchNotes(inputText: string): Promise<Note[]> {
     const db = getDb();
-    const normalized = (inputText ?? '').trim().toLowerCase();
-    const pattern = normalized.length ? `%${normalized}%` : null;
-
-    return db.getAllAsync<Note>(
-        `
+    const normalizedQuery = (inputText ?? '').trim().toLowerCase();
+    if(!normalizedQuery || normalizedQuery === '') {
+        return db.getAllAsync<Note>(`
             SELECT id_note, title, text, createdAt, updatedAt
             FROM note
-            WHERE (? IS NULL) OR (lower(title) LIKE ? OR lower(text) LIKE ?);
+            ORDER BY updatedAt DESC
+        `);
+    }
+
+    const ftsQuery = normalizedQuery + "*";
+    return db.getAllAsync<Note>(
+        `
+            SELECT *
+            FROM virtual_note v
+            join note n on n.id_note = v.rowid
+            WHERE virtual_note MATCH ?
+            ORDER BY n.updatedAt DESC
         `,
-        [pattern, pattern, pattern] // <-- array posizionale
+        [ftsQuery]
     );
 }
-
 
 // READ (singola)
 export async function getNote(id_note: number): Promise<Note | null> {

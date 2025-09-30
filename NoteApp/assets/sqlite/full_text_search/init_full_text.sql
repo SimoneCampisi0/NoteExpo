@@ -4,10 +4,6 @@ USING FTS5(title, text);
 INSERT INTO virtual_note(title, text)
 SELECT title, text FROM note;
 
-SELECT *
-FROM virtual_note
-WHERE virtual_note MATCH 'example'
-
 --TODO: scrivere trigger di create/update/delete di una nota
 --Funzionano in locale
 DROP TRIGGER IF EXISTS note_ai;

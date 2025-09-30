@@ -11,38 +11,20 @@ export default function NotesListScreen() {
     const [isSearching, setIsSearching] = useState(false);
     const [query, setQuery] = useState("");
 
-    const loadNotes = useCallback(async () => {
-        try {
-            const rows = await listNotes();
-            setNotes(rows);
-        } catch (err) {
-            console.log("error during notes loading: ", err);
-        }
-    }, []);
-
     const loadNotesWithFilters = useCallback(async () => {
         try {
-            console.log("entro")
             const newNotes = await searchNotes(query);
-            console.log("new notes", notes)
             setNotes(newNotes);
-        } catch(err) {
+        } catch (err) {
             console.log("error during notes loading: ", err);
         }
     }, [query]);
 
-    useEffect(() => {
-        loadNotesWithFilters();
-    }, [loadNotesWithFilters])
-
-    /* Effetto che viene eseguito quando si sposta il focus su questo stack */
     useFocusEffect(
         useCallback(() => {
-            if (!query.trim()) {
-                loadNotes();
-            }
-        }, [loadNotes, query])
-    );
+            loadNotesWithFilters();
+        }, [loadNotesWithFilters])
+    )
 
     /* Effetto che viene eseguito per definire il layout dell'header dello stack */
     useLayoutEffect(() => {
@@ -98,26 +80,6 @@ export default function NotesListScreen() {
 
     return (
         <>
-            {/*<Stack.Screen*/}
-            {/*    options={{*/}
-            {/*        title: "My Notes",*/}
-            {/*        headerBackVisible: false,*/}
-            {/*        headerLeft: () => (*/}
-            {/*            <Pressable onPress={() => console.log("open search bar") }>*/}
-            {/*                <Text style={{fontSize: 18, paddingHorizontal: 10}}>*/}
-            {/*                    <FontAwesome6 name={"magnifying-glass"} size={18}/>*/}
-            {/*                </Text>*/}
-            {/*            </Pressable>*/}
-            {/*        ),*/}
-            {/*        headerRight: () => (*/}
-            {/*            <Pressable onPress={() => router.push("/note/new")}>*/}
-            {/*                <Text style={{fontSize: 18, paddingHorizontal: 10}}>*/}
-            {/*                    <FontAwesome6 name={"plus"} size={18}/>*/}
-            {/*                </Text>*/}
-            {/*            </Pressable>*/}
-            {/*        ),*/}
-            {/*    }}*/}
-            {/*/>*/}
             <Stack.Screen options={{headerBackVisible: false}}/>
 
 
